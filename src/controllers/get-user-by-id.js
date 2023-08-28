@@ -1,5 +1,10 @@
-import { notFound, ok, serverError } from './helpers/http.js'
-import { checkIfIdIsValid, invalidIdResponse } from './helpers/user.js'
+import {
+    checkIfIdIsValid,
+    invalidIdResponse,
+    notFound,
+    ok,
+    serverError,
+} from './helpers/index.js'
 import { GetUserByIdUseCase } from '../use-cases/get-user-by-id.js'
 
 export class GetUserByIdController {
