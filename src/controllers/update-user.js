@@ -51,10 +51,10 @@ export class UpdateUserController {
             }
 
             if (params.email) {
-                const emailIsValid = checkIfEmailIsValid()
+                const emailIsValid = checkIfEmailIsValid(params.email)
 
                 if (!emailIsValid) {
-                    return emailIsAlreadyInUseResponse(params.email)
+                    return emailIsAlreadyInUseResponse()
                 }
             }
 
