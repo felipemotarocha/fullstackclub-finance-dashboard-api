@@ -3,7 +3,7 @@ import { DeleteUserController } from './delete-user'
 
 describe('DeleteUserController', () => {
     class DeleteUserUseCaseStub {
-        execute() {
+        async execute() {
             return {
                 id: faker.string.uuid(),
                 first_name: faker.person.firstName(),
@@ -53,7 +53,7 @@ describe('DeleteUserController', () => {
     it('should return 404 if user is not found', async () => {
         // arrange
         const { sut, deleteUserUseCase } = makeSut()
-        jest.spyOn(deleteUserUseCase, 'execute').mockReturnValueOnce(null)
+        jest.spyOn(deleteUserUseCase, 'execute').mockResolvedValue(null)
 
         // act
         const result = await sut.execute(httpRequest)
@@ -65,9 +65,9 @@ describe('DeleteUserController', () => {
     it('should return 500 if DeleteUserUseCase throws', async () => {
         // arrange
         const { sut, deleteUserUseCase } = makeSut()
-        jest.spyOn(deleteUserUseCase, 'execute').mockImplementationOnce(() => {
-            throw new Error()
-        })
+        jest.spyOn(deleteUserUseCase, 'execute').mockRejectedValueOnce(
+            new Error(),
+        )
 
         // act
         const result = await sut.execute(httpRequest)
