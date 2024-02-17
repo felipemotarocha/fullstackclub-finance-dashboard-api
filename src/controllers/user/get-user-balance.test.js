@@ -56,4 +56,16 @@ describe('GetUserBalanceController', () => {
         // assert
         expect(result.statusCode).toBe(500)
     })
+
+    it('should call GetUserBalanceUseCase with correct params', async () => {
+        // arrange
+        const { sut, getUserBalanceUseCase } = makeSut()
+        const executeSpy = jest.spyOn(getUserBalanceUseCase, 'execute')
+
+        // act
+        await sut.execute(httpRequest)
+
+        // assert
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.userId)
+    })
 })
