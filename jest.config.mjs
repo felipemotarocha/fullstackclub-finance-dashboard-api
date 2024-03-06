@@ -8,6 +8,7 @@ const config = {
     coverageDirectory: 'coverage',
     coverageProvider: 'v8',
     collectCoverageFrom: ['src/**/*.js'],
+    globalSetup: '<rootDir>/jest.global-setup.cjs',
 }
 
 export default config
