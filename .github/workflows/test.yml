@@ -24,13 +24,13 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Create env file
         run: |
           touch .env.test
           echo DATABASE_URL="postgresql://postgres:password@localhost:5433" >> .env.test
-
-      - name: Checkout code
-        uses: actions/checkout@v2
 
       - name: Install dependencies
         run: npm ci
