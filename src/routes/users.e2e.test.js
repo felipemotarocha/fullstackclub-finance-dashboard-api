@@ -145,4 +145,23 @@ describe('User Routes E2E Tests', () => {
 
         expect(response.status).toBe(404)
     })
+
+    it('POST /api/users should return 400 when the provided e-mail is already in use', async () => {
+        const { body: createdUser } = await request(app)
+            .post('/api/users')
+            .send({
+                ...user,
+                id: undefined,
+            })
+
+        const response = await request(app)
+            .post('/api/users')
+            .send({
+                ...user,
+                id: undefined,
+                email: createdUser.email,
+            })
+
+        expect(response.status).toBe(400)
+    })
 })
