@@ -8,22 +8,22 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  first_name String @db.VarChar(50)
-  last_name String @db.VarChar(50)
-  email String @db.VarChar(100) @unique
-  password String @db.VarChar(100)
+  id           String        @id @default(uuid())
+  first_name   String        @db.VarChar(50)
+  last_name    String        @db.VarChar(50)
+  email        String        @unique @db.VarChar(100)
+  password     String        @db.VarChar(100)
   transactions Transaction[]
 }
 
 model Transaction {
-  id String @id @default(uuid())
+  id      String          @id @default(uuid())
   user_id String
-  user User @relation(fields: [user_id], references: [id])
-  name String @db.VarChar(50)
-  date DateTime @db.Date
-  amount Decimal @db.Decimal(10, 2)
-  type TransactionType 
+  user    User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  name    String          @db.VarChar(50)
+  date    DateTime        @db.Date
+  amount  Decimal         @db.Decimal(10, 2)
+  type    TransactionType
 }
 
 enum TransactionType {
