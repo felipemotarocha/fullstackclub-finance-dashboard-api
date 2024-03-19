@@ -3,7 +3,7 @@ import express from 'express'
 
 import { usersRouter, transactionsRouter } from './src/routes/index.js'
 
-const app = express()
+export const app = express()
 
 app.use(express.json())
 
