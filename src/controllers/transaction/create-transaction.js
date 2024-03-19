@@ -1,5 +1,11 @@
+import { UserNotFoundError } from '../../errors/user.js'
 import { createTransactionSchema } from '../../schemas/transaction.js'
-import { badRequest, created, serverError } from '../helpers/index.js'
+import {
+    badRequest,
+    created,
+    serverError,
+    userNotFoundResponse,
+} from '../helpers/index.js'
 import { ZodError } from 'zod'
 
 export class CreateTransactionController {
@@ -13,9 +19,8 @@ export class CreateTransactionController {
 
             await createTransactionSchema.parseAsync(params)
 
-            const transaction = await this.createTransactionUseCase.execute(
-                params,
-            )
+            const transaction =
+                await this.createTransactionUseCase.execute(params)
 
             return created(transaction)
         } catch (error) {
@@ -23,6 +28,10 @@ export class CreateTransactionController {
                 return badRequest({
                     message: error.errors[0].message,
                 })
+            }
+
+            if (error instanceof UserNotFoundError) {
+                return userNotFoundResponse()
             }
 
             console.error(error)
