@@ -1,0 +1,8 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "FSC Finance App API",
+        "description": "API for FSC Finance App that allows users to manage their finances.",
+        "version": "1.0.0"
+    }
+}
