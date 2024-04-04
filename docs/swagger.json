@@ -317,6 +317,39 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "summary": "Delete transaction by ID",
+                "tags": ["Transaction"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "transactionId",
+                        "required": true,
+                        "type": "string",
+                        "description": "ID of the transaction to delete"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transaction deleted successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "404": {
+                        "description": "Transaction not found",
+                        "schema": {
+                            "$ref": "#/definitions/TransactionNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/InternalServerErrorResponse"
+                        }
+                    }
+                }
             }
         }
     },
@@ -372,19 +405,23 @@
             "properties": {
                 "first_name": {
                     "type": "string",
-                    "example": "John"
+                    "example": "John",
+                    "required": true
                 },
                 "last_name": {
                     "type": "string",
-                    "example": "Doe"
+                    "example": "Doe",
+                    "required": true
                 },
                 "email": {
                     "type": "string",
-                    "example": "john@doe.com"
+                    "example": "john@doe.com",
+                    "required": true
                 },
                 "password": {
                     "type": "string",
-                    "example": "password"
+                    "example": "password",
+                    "required": true
                 }
             }
         },
@@ -428,24 +465,29 @@
             "properties": {
                 "user_id": {
                     "type": "string",
-                    "example": "e29ef739-ffae-45a8-a582-fb56f9660a12"
+                    "example": "e29ef739-ffae-45a8-a582-fb56f9660a12",
+                    "required": true
                 },
                 "name": {
                     "type": "string",
-                    "example": "Salary"
+                    "example": "Salary",
+                    "required": true
                 },
                 "type": {
                     "type": "string",
                     "example": "EARNING",
-                    "description": "EARNING, EXPENSE, INVESTMENT"
+                    "description": "EARNING, EXPENSE, INVESTMENT",
+                    "required": true
                 },
                 "date": {
                     "type": "string",
-                    "example": "2023-12-15T17:08:26.189Z"
+                    "example": "2023-12-15T17:08:26.189Z",
+                    "required": true
                 },
                 "amount": {
                     "type": "number",
-                    "example": "1000"
+                    "example": "1000",
+                    "required": true
                 }
             }
         },
