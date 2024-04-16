@@ -9,7 +9,9 @@
         "test:watch": "npm run test -- --watch",
         "test:coverage": "npm run test -- --coverage",
         "postinstall": "husky install && prisma generate",
-        "start:dev": "node --watch index.js"
+        "start:dev": "node --watch index.js",
+        "eslint:check": "eslint src --ext .js",
+        "prettier:check": "prettier --check src"
     },
     "keywords": [],
     "author": "",
