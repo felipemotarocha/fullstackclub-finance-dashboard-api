@@ -22,7 +22,7 @@ jobs:
         run: echo "DATABASE_URL=postgres://postgres:password@localhost:5433" >> .env.test
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --include=dev
 
       - name: ESlint
         run: npm run eslint:check
@@ -47,7 +47,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --include=dev
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
