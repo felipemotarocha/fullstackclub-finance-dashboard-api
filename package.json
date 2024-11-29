@@ -37,6 +37,7 @@
         "dotenv-cli": "^7.4.1",
         "express": "^4.19.2",
         "globals": "^15.0.0",
+        "jsonwebtoken": "^9.0.2",
         "swagger-ui-express": "^5.0.0",
         "uuid": "^9.0.1",
         "validator": "^13.11.0",
