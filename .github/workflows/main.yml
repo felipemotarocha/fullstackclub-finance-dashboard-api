@@ -1,71 +1,76 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
+    check:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20"
+            - name: Use Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '20'
 
-      - name: Create .env.test file
-        run: echo "DATABASE_URL=postgres://postgres:password@localhost:5433" >> .env.test
+            - name: Create .env.test file
+              run: |
+                  echo "DATABASE_URL=postgres://postgres:password@localhost:5433" >> .env.test
+                  echo "JWT_ACCESS_TOKEN_SECRET=secret" >> .env.test
+                  echo "JWT_REFRESH_TOKEN_SECRET=secret2" >> .env.test
 
-      - name: Install dependencies
-        run: npm ci --include=dev
+            - name: Install dependencies
+              run: npm ci --include=dev
 
-      - name: ESlint
-        run: npm run eslint:check
+            - name: ESlint
+              run: npm run eslint:check
 
-      - name: Prettier
-        run: npm run prettier:check
+            - name: Prettier
+              run: npm run prettier:check
 
-      - name: Test
-        run: npm run test
+            - name: Test
+              run: npm run test
 
-  migrate:
-    runs-on: ubuntu-latest
-    needs: check
-    environment: production
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    migrate:
+        runs-on: ubuntu-latest
+        needs: check
+        environment: production
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20"
+            - name: Use Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '20'
 
-      - name: Install dependencies
-        run: npm ci --include=dev
+            - name: Install dependencies
+              run: npm ci --include=dev
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            - name: Make envfile
+              uses: SpicyPizza/create-envfile@v2.0
+              with:
+                  envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+                  envkey_JWT_ACCESS_TOKEN_SECRET: ${{ secrets.JWT_ACCESS_TOKEN_SECRET }}
+                  envkey_JWT_REFRESH_TOKEN_SECRET: ${{ secrets.JWT_REFRESH_TOKEN_SECRET }}
 
-      - name: Run migrations
-        run: npx prisma migrate deploy
+            - name: Run migrations
+              run: npx prisma migrate deploy
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: migrate
-    environment: production
+    deploy:
+        runs-on: ubuntu-latest
+        needs: migrate
+        environment: production
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-      - name: Deploy to Production
-        run: |
-          curl "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+            - name: Deploy to Production
+              run: |
+                  curl "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
