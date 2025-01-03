@@ -23,7 +23,11 @@ describe('Get Transaction By User ID Controller', () => {
 
         // act
         const response = await sut.execute({
-            query: { userId: faker.string.uuid() },
+            query: {
+                userId: faker.string.uuid(),
+                from: '2021-01-01',
+                to: '2021-12-31',
+            },
         })
 
         // assert
@@ -49,7 +53,11 @@ describe('Get Transaction By User ID Controller', () => {
 
         // act
         const response = await sut.execute({
-            query: { userId: 'invalid_user_id' },
+            query: {
+                userId: 'invalid_user_id',
+                from: '2021-01-01',
+                to: '2021-12-31',
+            },
         })
 
         // assert
@@ -65,7 +73,11 @@ describe('Get Transaction By User ID Controller', () => {
 
         // act
         const response = await sut.execute({
-            query: { userId: faker.string.uuid() },
+            query: {
+                userId: faker.string.uuid(),
+                from: '2021-01-01',
+                to: '2021-12-31',
+            },
         })
 
         // assert
@@ -81,7 +93,11 @@ describe('Get Transaction By User ID Controller', () => {
 
         // act
         const response = await sut.execute({
-            query: { userId: faker.string.uuid() },
+            query: {
+                userId: faker.string.uuid(),
+                from: '2021-01-01',
+                to: '2021-12-31',
+            },
         })
 
         // assert
@@ -96,10 +112,14 @@ describe('Get Transaction By User ID Controller', () => {
 
         // act
         await sut.execute({
-            query: { userId: userId },
+            query: { userId: userId, from: '2021-01-01', to: '2021-12-31' },
         })
 
         // assert
-        expect(executeSpy).toHaveBeenCalledWith(userId)
+        expect(executeSpy).toHaveBeenCalledWith(
+            userId,
+            '2021-01-01',
+            '2021-12-31',
+        )
     })
 })
