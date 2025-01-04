@@ -282,7 +282,7 @@
                 ]
             }
         },
-        "/api/transactions": {
+        "/api/transactions/me": {
             "get": {
                 "summary": "Get authenticated user transactions",
                 "tags": ["Transaction"],
@@ -385,9 +385,9 @@
                 ]
             }
         },
-        "/api/transactions/{transactionId}": {
+        "/api/transactions/me/{transactionId}": {
             "patch": {
-                "summary": "Update transaction by ID",
+                "summary": "Update transaction by ID of the authenticated user",
                 "tags": ["Transaction"],
                 "parameters": [
                     {
@@ -439,7 +439,7 @@
                 ]
             },
             "delete": {
-                "summary": "Delete transaction by ID",
+                "summary": "Delete transaction by ID of the authenticated user",
                 "tags": ["Transaction"],
                 "parameters": [
                     {
