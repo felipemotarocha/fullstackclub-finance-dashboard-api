@@ -103,6 +103,6 @@ describe('Get Transaction By User ID Controller', () => {
         })
 
         // assert
-        expect(executeSpy).toHaveBeenCalledWith(userId)
+        expect(executeSpy).toHaveBeenCalledWith(userId, from, to)
     })
 })
