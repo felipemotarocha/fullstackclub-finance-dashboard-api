@@ -18,6 +18,8 @@ transactionsRouter.get('/', auth, async (request, response) => {
             ...request,
             query: {
                 ...request.query,
+                from: request.query.from,
+                to: request.query.to,
                 userId: request.userId,
             },
         })
