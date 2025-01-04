@@ -53,7 +53,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/api/users/me": {
             "get": {
                 "tags": ["User"],
                 "summary": "Get authenticated user",
@@ -113,16 +115,9 @@
                 ]
             },
             "patch": {
-                "summary": "Update user by ID",
+                "summary": "Update authenticated user",
                 "tags": ["User"],
                 "parameters": [
-                    {
-                        "in": "path",
-                        "name": "userId",
-                        "required": true,
-                        "type": "string",
-                        "description": "ID of the user to update"
-                    },
                     {
                         "name": "body",
                         "required": true,
@@ -232,7 +227,7 @@
                 }
             }
         },
-        "/api/users/balance": {
+        "/api/users/me/balance": {
             "get": {
                 "summary": "Get authenticated user balance",
                 "tags": ["User"],
