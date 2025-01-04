@@ -86,7 +86,7 @@ describe('User Routes E2E Tests', () => {
             })
 
         await request(app)
-            .post('/api/transactions')
+            .post('/api/transactions/me')
             .set('Authorization', `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 user_id: createdUser.id,
@@ -97,7 +97,7 @@ describe('User Routes E2E Tests', () => {
             })
 
         await request(app)
-            .post('/api/transactions')
+            .post('/api/transactions/me')
             .set('Authorization', `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 user_id: createdUser.id,
@@ -108,7 +108,7 @@ describe('User Routes E2E Tests', () => {
             })
 
         await request(app)
-            .post('/api/transactions')
+            .post('/api/transactions/me')
             .set('Authorization', `Bearer ${createdUser.tokens.accessToken}`)
             .send({
                 user_id: createdUser.id,
