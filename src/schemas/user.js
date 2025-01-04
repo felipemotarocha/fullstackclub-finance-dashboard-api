@@ -68,3 +68,9 @@ export const getTransactionsByUserIdSchema = z.object({
     from: z.string().date(),
     to: z.string().date(),
 })
+
+export const getUserBalanceSchema = z.object({
+    userId: z.string().uuid(),
+    from: z.string().date(),
+    to: z.string().date(),
+})

@@ -76,6 +76,7 @@ describe('User Routes E2E Tests', () => {
     })
 
     it('GET /api/users/:userId/balance should return 200 and correct balance', async () => {
+        const date = new Date('2021-01-01')
         const { body: createdUser } = await request(app)
             .post('/api/users')
             .send({
@@ -89,7 +90,7 @@ describe('User Routes E2E Tests', () => {
             .send({
                 user_id: createdUser.id,
                 name: faker.commerce.productName(),
-                date: faker.date.anytime().toISOString(),
+                date,
                 type: TransactionType.EARNING,
                 amount: 10000,
             })
@@ -100,7 +101,7 @@ describe('User Routes E2E Tests', () => {
             .send({
                 user_id: createdUser.id,
                 name: faker.commerce.productName(),
-                date: faker.date.anytime().toISOString(),
+                date,
                 type: TransactionType.EXPENSE,
                 amount: 2000,
             })
@@ -111,13 +112,13 @@ describe('User Routes E2E Tests', () => {
             .send({
                 user_id: createdUser.id,
                 name: faker.commerce.productName(),
-                date: faker.date.anytime().toISOString(),
+                date,
                 type: TransactionType.INVESTMENT,
                 amount: 2000,
             })
 
         const response = await request(app)
-            .get(`/api/users/balance`)
+            .get(`/api/users/balance?from=2021-01-01&to=2021-12-31`)
             .set('Authorization', `Bearer ${createdUser.tokens.accessToken}`)
 
         expect(response.status).toBe(200)
@@ -126,6 +127,9 @@ describe('User Routes E2E Tests', () => {
             expenses: '2000',
             investments: '2000',
             balance: '6000',
+            earningsPercentage: '71',
+            expensesPercentage: '14',
+            investmentsPercentage: '14',
         })
     })
 
