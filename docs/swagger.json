@@ -236,6 +236,30 @@
             "get": {
                 "summary": "Get authenticated user balance",
                 "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": true,
+                        "description": "Start date for the balance query (format: YYYY-MM-DD).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2024-01-01"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "required": true,
+                        "description": "End date for the balance query (format: YYYY-MM-DD).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2024-01-31"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "User balance found",
@@ -267,6 +291,30 @@
             "get": {
                 "summary": "Get authenticated user transactions",
                 "tags": ["Transaction"],
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "required": true,
+                        "description": "Start date for the transactions query (format: YYYY-MM-DD).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2024-01-01"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "required": true,
+                        "description": "End date for the transactions query (format: YYYY-MM-DD).",
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2024-01-31"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Transactions found",
@@ -506,13 +554,25 @@
                     "type": "string",
                     "example": "1000"
                 },
+                "earningsPercentage": {
+                    "type": "string",
+                    "example": "50"
+                },
                 "expenses": {
                     "type": "string",
                     "example": "500"
                 },
+                "expensesPercentage": {
+                    "type": "string",
+                    "example": "25"
+                },
                 "investments": {
                     "type": "string",
                     "example": "1000"
+                },
+                "investmentsPercentage": {
+                    "type": "string",
+                    "example": "25"
                 },
                 "balance": {
                     "type": "string",
